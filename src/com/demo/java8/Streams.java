@@ -3,6 +3,8 @@ package com.demo.java8;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 class Worker {
 	private String firstName;
@@ -74,5 +76,20 @@ public class Streams {
 			.sorted(Comparator.comparing(Worker::getFirstName))
 			.map(w -> w.getFirstName().toUpperCase())
 			.forEach(System.out::println);
+		
+		// Who will give me the min and max ages of those minor workers?
+		Worker minAgeWorker = workers.stream()
+									.filter(w -> w.getAge() <= 14)
+									.min(Comparator.comparing(Worker::getAge))
+									.get();
+		
+		System.out.println("Minimum age worker is --> " + minAgeWorker);
+		
+		Worker maxAgeWorker = workers.stream()
+									.filter(w -> w.getAge() <= 14)
+									.max(Comparator.comparing(Worker::getAge))
+									.get();
+				
+		System.out.println("Max age worker is --> " + maxAgeWorker);		
 	}
 }
