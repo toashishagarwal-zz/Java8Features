@@ -65,6 +65,14 @@ public class Streams {
 		long numberOfChildWorkers = workers.stream()
 										.filter(w -> (w.getAge() <= 14))
 										.count();
-		System.out.println("Number of Child workers are --> " + numberOfChildWorkers);
+		System.out.println("\nNumber of Child workers are --> " + numberOfChildWorkers);
+		
+		// Get all child workers. Display their names alphabetically in Uppercase
+		System.out.println("\nTheir names in Capital letters are ");
+		workers.stream()
+			.filter(w -> (w.getAge() <= 14))
+			.sorted(Comparator.comparing(Worker::getFirstName))
+			.map(w -> w.getFirstName().toUpperCase())
+			.forEach(System.out::println);
 	}
 }
